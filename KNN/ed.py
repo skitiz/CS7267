@@ -4,7 +4,7 @@ from collections import Counter
 def knn(training, test_data, k):
     distances = []
     for group in training:
-       for features in training[0:(len(group)/2)]:
+       for features in training[0:len(group)]:
             distance = np.sqrt(np.sum(np.power(np.array(features) - np.array(test_data), 2)))
             distances.append([distance, group[0]])
 
@@ -24,7 +24,7 @@ def main():
     correct = 0
     total = 0
     for data in test_data:
-        for group in data[0:(len(data)/2)]:
+        for group in data[0:len(data)]:
             vote = knn(training, group, k)
             if data[0] == vote:
                 correct += 1
