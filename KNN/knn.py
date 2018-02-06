@@ -26,8 +26,10 @@ def main():
     '''
     Declare the variables for the code.
     '''
-    # Using k = 7.
+    # Using k = 7. Modify this to change the accuracy.
     k = 7
+
+
     neighbors = np.zeros(10, dtype = int)
     prediction = []
     groundtruth = []
