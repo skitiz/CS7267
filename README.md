@@ -1,6 +1,6 @@
-#Machine Learning (CS7267)
+# Machine Learning (CS7267)
 
-##Dependencies
+## Dependencies
 * Python
 * numpy
 
