@@ -3,6 +3,8 @@
 ## Dependencies
 * Python
 * numpy
+* Pandas
+* MNIST Dataset
 
 ## Homework 1
 # K - Nearest Neighbours
