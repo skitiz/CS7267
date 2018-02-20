@@ -67,7 +67,9 @@ if __name__ == '__main__':
         bCost = np.sum((np.dot(trainData, b_est) - np.array(trainLabels)) **2)
         bs.append(b_est)
         costs.append(bCost)
-    
+
     plt.plot(costs)
     plt.show()
-    print(b_est)
+
+    predictions = np.array(np.dot(testData, b_est) > 0.5)
+    print("Accuracy of the model (gradientDescent) is : ", (sum(predictions == testLabels) / float(len(testData))) * 100)
