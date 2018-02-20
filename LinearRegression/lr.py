@@ -73,3 +73,4 @@ if __name__ == '__main__':
 
     predictions = np.array(np.dot(testData, b_est) > 0.5)
     print("Accuracy of the model (gradientDescent) is : ", (sum(predictions == testLabels) / float(len(testData))) * 100)
+    print("The difference between b_opt and b_est: ", sum(abs(b_opt - b_est)))

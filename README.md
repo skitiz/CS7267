@@ -16,3 +16,11 @@ _Current accuracy : 90%_
 Modify the values of `k` inside to change accuracy levels.
 
 Contributions are welcome!
+
+## Homework 2
+# Linear Regression
+We use MNIST training and test data to calculate an optimal value for `b` to minimize the cost function.
+
+*To run the code :* `python lr.py`
+
+Modify the value for `learningRate` to try other possible answers.
