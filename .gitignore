@@ -1,6 +1,2 @@
 *.csv
 *.ipynb
-.idea/dictionaries/
-.idea/other.xml
-venv/
-logistic-regression/.ipynb_checkpoints/
