@@ -11,4 +11,7 @@ kf = kFold(len())
 // Compute true positive rates and false positive rates for ROC curve
 // Plot ROC curve for 10-cross validation
 
-dataset =  pd.
+dataset =  pd.read_csv('MNIST_CV.csv', skiprows=[1], header=None)
+
+if '__name__' == '__main__':
+    main()
