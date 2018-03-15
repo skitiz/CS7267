@@ -1,5 +1,5 @@
 *.csv
 *.ipynb
 venv/
-.idea/
+.idea/workspace.xml
 logistic-regression/.ipynb_checkpoints/
