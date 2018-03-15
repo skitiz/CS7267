@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc07e33c-4923-4614-a415-4ceecbda540e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/CS7267.iml" afterPath="$PROJECT_DIR$/.idea/CS7267.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/lr.py" afterPath="$PROJECT_DIR$/.idea/lr.py" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/logistic-regression/sample.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/KNN/knn.py" afterPath="$PROJECT_DIR$/KNN/knn.py" />
-      <change beforePath="$PROJECT_DIR$/logistic regression/lr.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/logistic-regression/logistic-regression.py" afterPath="$PROJECT_DIR$/logistic-regression/logistic-regression.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,43 +15,46 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/CS7267$CS7267.coverage" NAME="CS7267 Coverage Results" MODIFIED="1521054656937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/CS7267$lr.coverage" NAME="lr Coverage Results" MODIFIED="1521060396582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logistic-regression" />
+    <SUITE FILE_PATH="coverage/CS7267$lr.coverage" NAME="lr Coverage Results" MODIFIED="1521126757116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logistic-regression" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="sample.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/logistic-regression/sample.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="759">
+                    <caret line="129" column="28" lean-forward="true" selection-start-line="129" selection-start-column="28" selection-end-line="129" selection-end-column="28" />
+                    <folding>
+                      <element signature="e#133#174#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="CS7267" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="logistic-regression.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="logistic-regression.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/logistic-regression/logistic-regression.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="91" column="14" lean-forward="false" selection-start-line="91" selection-start-column="14" selection-end-line="91" selection-end-column="14" />
+            <state relative-caret-position="327">
+              <caret line="84" column="54" lean-forward="false" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logistic-regression.ipynb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/logistic-regression/logistic-regression.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="2" />
             </state>
           </provider>
         </entry>
@@ -65,8 +64,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -82,8 +81,9 @@
         <option value="$PROJECT_DIR$/logistic-regression/logisitic-regression.py" />
         <option value="$PROJECT_DIR$/KNN/knn.py" />
         <option value="$PROJECT_DIR$/logistic-regression/logistic-regression.ipynb" />
-        <option value="$PROJECT_DIR$/logistic-regression/logistic-regression.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/logistic-regression/sample.py" />
+        <option value="$PROJECT_DIR$/logistic-regression/logistic-regression.py" />
       </list>
     </option>
   </component>
@@ -93,7 +93,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="852" />
     <option name="y" value="3" />
     <option name="width" value="852" />
@@ -135,7 +135,7 @@
     <panes />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/logistic-regression/logistic-regression.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/logistic-regression/sample.py" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/logistic-regression/logistic-regression.ipynb" />
@@ -156,6 +156,25 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.lr">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\kbantupa\Documents\GitHub\CS7267\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/logistic-regression" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CS7267" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/logistic-regression/sample.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -328,9 +347,10 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Python.lr" />
-      <item index="1" class="java.lang.String" itemvalue="Jupyter Notebook.CS7267" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Jupyter Notebook.CS7267" />
+      <item index="1" class="java.lang.String" itemvalue="Python.Unnamed" />
+      <item index="2" class="java.lang.String" itemvalue="Python.lr" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -364,7 +384,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -461,6 +481,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/logistic-regression/logistic-regression.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -468,21 +496,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logistic-regression/logistic-regression.py">
+    <entry file="file://$PROJECT_DIR$/logistic-regression/sample.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="91" column="14" lean-forward="false" selection-start-line="91" selection-start-column="14" selection-end-line="91" selection-end-column="14" />
+        <state relative-caret-position="759">
+          <caret line="129" column="28" lean-forward="true" selection-start-line="129" selection-start-column="28" selection-end-line="129" selection-end-column="28" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#133#174#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/logistic-regression/logistic-regression.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="327">
+          <caret line="84" column="54" lean-forward="false" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
