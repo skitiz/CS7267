@@ -1,4 +1,5 @@
 *.csv
 *.ipynb
 venv/
-
+.idea/
+logistic-regression/.ipynb_checkpoints/
