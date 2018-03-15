@@ -5,6 +5,7 @@
 * numpy
 * Pandas
 * MNIST Dataset
+* sklearn
 
 ## Homework 1
 # K - Nearest Neighbours
