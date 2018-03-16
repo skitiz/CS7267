@@ -1,17 +1,21 @@
+# Importing packages for the program.
 from sklearn.model_selection import KFold
 import numpy as np
 import matplotlib.pyplot as plt
 import time
 
 
+# Calculates the sigmoid and returns it.
 def calculate_sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 
 
+# Calculates the gradient and returns it.
 def calculate_gradient(m, x):
     return -1.0 / m * x
 
 
+# Calculates the logistic regression for training data and returns weights and optimized cost.
 def logistic_regression(train_data, train_labels, learning_rate, gradient_steps):
     weights = np.zeros(train_data.shape[1])
     costs = []
@@ -25,10 +29,12 @@ def logistic_regression(train_data, train_labels, learning_rate, gradient_steps)
     return weights, costs
 
 
+# Normalizes training and test data.
 def normalize(x):
     return x / 255.0
 
 
+# Calculates the true positive and false positive rates.
 def calculate_tpr_fpr(weights, test_data, test_label, threshold):
     predictions = calculate_sigmoid(np.dot(test_data, weights))
     tpr = 0
@@ -54,6 +60,7 @@ def calculate_tpr_fpr(weights, test_data, test_label, threshold):
     return tpr, fpr
 
 
+# Plotting function.
 def plotter(cost, fpr, tpr):
     plt.figure(1)
     plt.title("Gradient Descent Covergence")
@@ -65,6 +72,8 @@ def plotter(cost, fpr, tpr):
     plt.plot(fpr, tpr)
     plt.show()
 
+
+# Main function.
 def main():
     dataset = np.genfromtxt('MNIST_CV.csv', delimiter=',', dtype=int, skip_header=1)
     learning_rate = 1e-4
