@@ -129,6 +129,7 @@ if __name__ == '__main__':
     truePositiveRates += [0,1]
     truePositiveRates.sort()
 
+    print(error_costs[0])
     plt.figure(1)
     plt.title("Gradient Descent Convergence, fold: 0")
     plt.plot(error_costs[0])

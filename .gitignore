@@ -4,3 +4,4 @@ venv/
 .idea/workspace.xml
 logistic-regression/.ipynb_checkpoints/
 *.xml
+LogisitcRegression/
