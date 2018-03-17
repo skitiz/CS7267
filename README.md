@@ -25,3 +25,11 @@ We use MNIST training and test data to calculate an optimal value for `b` to min
 *To run the code :* `python lr.py`
 
 Modify the value for `learningRate` to try other possible answers.
+
+## Homework 3
+# Logisitc Regression
+We use MNIST dataset and do 10-Fold Cross Validation to get training and test data. We find optimal weights and calculate the value of TPR and FPR to plot the ROC curve.
+
+* To run the code :* `python logistic-regression.py`
+
+Modify the value for `learning_rate`, `gradient_steps` and `splits` to tinker with it.
