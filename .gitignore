@@ -5,3 +5,6 @@ venv/
 logistic-regression/.ipynb_checkpoints/
 *.xml
 LogisitcRegression/
+.DS_Store
+KNN/.DS_Store
+MINST_CV.csv
