@@ -8,3 +8,6 @@ LogisitcRegression/
 .DS_Store
 KNN/.DS_Store
 MINST_CV.csv
+neural-network/.ipynb_checkpoints/
+
+mnist.pkl.gz
