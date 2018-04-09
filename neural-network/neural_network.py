@@ -1,189 +1,208 @@
-# Referenced from https://github.com/MichalDanielDobrzanski/DeepLearningPython35/blob/master/network.py
-
-
-# %load network.py
-
-"""
-network.py
-~~~~~~~~~~
-IT WORKS
-
-A module to implement the stochastic gradient descent learning
-algorithm for a feedforward neural network.  Gradients are calculated
-using backpropagation.  Note that I have focused on making the code
-simple, easily readable, and easily modifiable.  It is not optimized,
-and omits many desirable features.
-"""
-
-#### Libraries
-# Standard library
-import random
-import mnist_loader
-
-# Third-party libraries
 import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
 
-class Network(object):
 
-    def __init__(self, sizes):
-        """The list ``sizes`` contains the number of neurons in the
-        respective layers of the network.  For example, if the list
-        was [2, 3, 1] then it would be a three-layer network, with the
-        first layer containing 2 neurons, the second layer 3 neurons,
-        and the third layer 1 neuron.  The biases and weights for the
-        network are initialized randomly, using a Gaussian
-        distribution with mean 0, and variance 1.  Note that the first
-        layer is assumed to be an input layer, and by convention we
-        won't set any biases for those neurons, since biases are only
-        ever used in computing the outputs from later layers."""
-        self.num_layers = len(sizes)
-        self.sizes = sizes
-        self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
-        self.weights = [np.random.randn(y, x)
-                        for x, y in zip(sizes[:-1], sizes[1:])]
+class MeanSquaredError:
+    def __init__(self):
+        pass
 
-    def feedforward(self, a):
-        """Return the output of the network if ``a`` is input."""
-        for b, w in zip(self.biases, self.weights):
-            a = sigmoid(np.dot(w, a)+b)
-        return a
+    @staticmethod
+    def nabla(a, y):
+        return a - y
 
-    def SGD(self, training_data, epochs, mini_batch_size, eta,
-            test_data=None):
-        """Train the neural network using mini-batch stochastic
-        gradient descent.  The ``training_data`` is a list of tuples
-        ``(x, y)`` representing the training inputs and the desired
-        outputs.  The other non-optional parameters are
-        self-explanatory.  If ``test_data`` is provided then the
-        network will be evaluated against the test data after each
-        epoch, and partial progress printed out.  This is useful for
-        tracking progress, but slows things down substantially."""
+    @staticmethod
+    def call(a, y):
+        return 0.5 * np.mean(np.linalg.norm(y - a, axis=1) ** 2)
 
-        training_data = list(training_data)
-        n = len(training_data)
 
-        if test_data:
-            test_data = list(test_data)
-            n_test = len(test_data)
+class Sigmoid:
+    @staticmethod
+    def call(z):
+        return 1.0 / (1.0 + np.exp(-z))
 
-        for j in range(epochs):
-            random.shuffle(training_data)
-            mini_batches = [
-                training_data[k:k+mini_batch_size]
-                for k in range(0, n, mini_batch_size)]
-            for mini_batch in mini_batches:
-                self.update_mini_batch(mini_batch, eta)
-            if test_data:
-                print("Epoch {} : {} / {}".format(j,self.evaluate(test_data),n_test));
+    def prime(self, z):
+        return self.call(z) * (1 - self.call(z))
+
+
+class Softmax:
+    @staticmethod
+    def call(z):
+        c = np.max(z)
+        return np.exp(z - c) / np.sum(np.exp(z - c))
+
+
+class Layer:
+    def activation_prime(self):
+        return self.activation_function.prime(self.weighted_input)
+
+    def update_nabla(self, prev_layer):
+        self.nabla(prev_layer)
+
+    def nabla(self, prev_layer):
+        if self.param_num() == 0:
+            return
+
+    def update_params(self, c):
+        pass
+
+
+class Dense(Layer):
+    def __init__(self, n, activation=Sigmoid()):
+        self.n = n
+        self.activation_function = activation
+        self.weighted_input = 0
+        self.activation = 0
+
+    def build(self, input_num):
+        assert type(input_num) != tuple
+
+        self.weight = np.random.rand(self.n, input_num) / np.sqrt(input_num)
+        self.bias = np.random.rand(self.n)
+
+        self.weight_nabla = np.zeros_like(self.weight)
+        self.bias_nabla = np.zeros_like(self.bias)
+
+        self.input_num = input_num
+
+    def call(self, x):
+        weighted_input = np.dot(self.weight, x) + self.bias
+        activation = self.activation_function.call(weighted_input)
+
+        self.weighted_input = weighted_input
+        self.activation = activation
+
+        return activation
+
+    def backpropogation(self, prev_layer):
+        return np.dot(self.weight.T, self.error) * prev_layer.activation_prime()
+
+    def nabla(self, prev_layer):
+        w_nabla = np.array([prev_layer.activation] * self.n) * np.array([self.error] * self.input_num).T
+        b_nabla = self.error
+
+        return w_nabla, b_nabla
+
+    def update_nabla(self, prev_layer):
+        w_nabla, b_nabla = self.nabla(prev_layer)
+
+        self.weight_nabla += w_nabla
+        self.bias_nabla += b_nabla
+
+    def update_params(self, c):
+        self.weight += c * self.weight_nabla
+        self.bias += c * self.bias_nabla
+
+        self.weight_nabla *= 0.
+        self.bias_nabla *= 0
+
+    def output_num(self):
+        return self.n
+
+    def param_num(self):
+        weight_num = self.weight.shape[0] * self.weight.shape[1]
+        bias_num = self.bias.shape[0]
+
+        return weight_num + bias_num
+
+
+class Input(Layer):
+    def __init__(self, shape):
+        self.shape = shape
+        self.weighted_input = 0
+        self.activation = 0
+
+    def build(self):
+        pass
+
+    def call(self, x):
+        self.weighted_input = x
+        self.activation = x
+        return x
+
+    def output_num(self):
+        return self.shape
+
+
+class Network:
+    def __init__(self, layers, loss=MeanSquaredError()):
+        self.layers = layers
+        self.layer_nums = []
+        self.loss_function = loss
+
+        for i, x in enumerate(self.layers):
+            if i - 1 >= 0:
+                x.build(self.layer_nums[i - 1])
+
+            self.layer_nums.append(x.output_num())
+
+    def sgd(self, train_data, val_data, test_data, epoch, batch_size, learning_rate = 0.1):
+        X_train, y_train = train_data
+        X_val, y_val = val_data
+        X_test, y_test = test_data
+
+        for epoch in range(epoch):
+            for i in range(len(X_train) // batch_size):
+                example_size = len(X_train)
+                batch_index = np.random.choice(np.arange(example_size), size=batch_size)
+                X_batch = X_train[batch_index]
+                y_batch = X_train[batch_index]
+
+                batch_num = len(X_batch)
+                self.backpropogation(X_batch, y_batch)
+                for layer in self.layers[1:]:
+                    layer.update_params(-1 * learning_rate / batch_num)
+
+            train_accuracy, train_loss= self.evaluate(X_batch, y_batch)
+            valid_accuracy, valid_loss = self.evaluate(X_val, y_val)
+
+            print("epoch: %d\ttrain_accuracy: %f\ttrain_loss: %f\tvalid_accuracy: %f\tvalid_loss: %f" % (
+            epoch, train_accuracy, train_loss, valid_accuracy, valid_loss))
+
+        print("Test accuracy L %f\ttest_loss: %f" % self.evaluate(X_test, y_test))
+
+    def feedforward(self, x):
+        activations = []
+
+        if type(self.layer_nums[0]) == int:
+            assert x.shape[0] == self.layer_nums[0]
+        else:
+            assert x.shape == tuple(self.layer_nums[0])
+
+        times = []
+        for l in range(len(self.layers)):
+            if l - 1 >= 0:
+                prev_activation = activations[l - 1]
             else:
-                print("Epoch {} complete".format(j))
+                prev_activation = x
 
-    def update_mini_batch(self, mini_batch, eta):
-        """Update the network's weights and biases by applying
-        gradient descent using backpropagation to a single mini batch.
-        The ``mini_batch`` is a list of tuples ``(x, y)``, and ``eta``
-        is the learning rate."""
-        nabla_b = [np.zeros(b.shape) for b in self.biases]
-        nabla_w = [np.zeros(w.shape) for w in self.weights]
-        for x, y in mini_batch:
-            delta_nabla_b, delta_nabla_w = self.backprop(x, y)
-            nabla_b = [nb+dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
-            nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
-        self.weights = [w-(eta/len(mini_batch))*nw
-                        for w, nw in zip(self.weights, nabla_w)]
-        self.biases = [b-(eta/len(mini_batch))*nb
-                       for b, nb in zip(self.biases, nabla_b)]
-
-    def backprop(self, x, y):
-        """Return a tuple ``(nabla_b, nabla_w)`` representing the
-        gradient for the cost function C_x.  ``nabla_b`` and
-        ``nabla_w`` are layer-by-layer lists of numpy arrays, similar
-        to ``self.biases`` and ``self.weights``."""
-        nabla_b = [np.zeros(b.shape) for b in self.biases]
-        nabla_w = [np.zeros(w.shape) for w in self.weights]
-        # feedforward
-        activation = x
-        activations = [x] # list to store all the activations, layer by layer
-        zs = [] # list to store all the z vectors, layer by layer
-        for b, w in zip(self.biases, self.weights):
-            z = np.dot(w, activation)+b
-            zs.append(z)
-            activation = sigmoid(z)
+            activation = self.layers[l].call(prev_activation)
             activations.append(activation)
-        # backward pass
-        delta = self.cost_derivative(activations[-1], y) * \
-            sigmoid_prime(zs[-1])
-        nabla_b[-1] = delta
-        nabla_w[-1] = np.dot(delta, activations[-2].transpose())
-        # Note that the variable l in the loop below is used a little
-        # differently to the notation in Chapter 2 of the book.  Here,
-        # l = 1 means the last layer of neurons, l = 2 is the
-        # second-last layer, and so on.  It's a renumbering of the
-        # scheme in the book, used here to take advantage of the fact
-        # that Python can use negative indices in lists.
-        for l in range(2, self.num_layers):
-            z = zs[-l]
-            sp = sigmoid_prime(z)
-            delta = np.dot(self.weights[-l+1].transpose(), delta) * sp
-            nabla_b[-l] = delta
-            nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())
-        return (nabla_b, nabla_w)
 
-    def evaluate(self, test_data):
-        """Return the number of test inputs for which the neural
-        network outputs the correct result. Note that the neural
-        network's output is assumed to be the index of whichever
-        neuron in the final layer has the highest activation."""
-        test_results = [(np.argmax(self.feedforward(x)), y)
-                        for (x, y) in test_data]
-        return sum(int(x == y) for (x, y) in test_results)
+        return activations
 
-    def cost_derivative(self, output_activations, y):
-        """Return the vector of partial derivatives \partial C_x /
-        \partial a for the output activations."""
-        return (output_activations-y)
+    def backpropogation(self, X, y):
+        batch_num = len(X)
+        assert len(X) == len(y)
 
-#### Miscellaneous functions
-def sigmoid(z):
-    """The sigmoid function."""
-    return 1.0/(1.0+np.exp(-z))
+        for i, x in enumerate(X):
+            activations = self.feedforward(x)
 
-def sigmoid_prime(z):
-    """Derivative of the sigmoid function."""
-    return sigmoid(z)*(1-sigmoid(z))
+            last_layer = self.layers[-1]
+            if self.loss_function.__class__.__name__ == 'MeanSquaredError':
+                last_layer.error = last_layer.activation - y[i]
+            else:
+                nabla = self.loss_function.nabla(last_layer.activation, y[i])
+                last_layer.error = nabla * last_layer.activation_function.prime(last_layer.weighted_input)
 
-def vectorize(y):
-    e = np.zeros((10, 1))
-    e[y] = 1.0
-    return e
+            for l in range(len(self.layers)-1, 1, -1):
+                layer = self.layers[l]
+                self.layers[l-1].error = layer.backpropogation(self.layers[l-1])
 
+            for layer, prev_layer in zip(self.layers[1:], self.layers[0:-1]):
+                layer.update_nabla(prev_layer)
 
-def main():
-    data = pd.read_csv('MNIST_CV.csv', delimiter=',', skiprows=1, dtype=int)
+    def evaluate(self, X, y):
+        y_out = np.array([self.feedforward(x)[-1] for x in X])
+        accuracy = np.mean(y_out.argmax(axis=1) == y.argmax(axis=1))
+        loss = self.loss_function.call(y_out, y)
 
-    X = np.array(data.iloc[: , 1:])
-    y = np.array(data.iloc[:, 0])
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-    # X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=1)
-
-    training_inputs = [np.reshape(x, (784, 1)) for x in X_train]
-    training_results = [vectorize(y) for y in y_train]
-    training_data = zip(training_inputs, training_results)
-    # validation_inputs = [np.reshape(x, (784, 1)) for x in X_val]
-    # validation_data = zip(validation_inputs, y_val)
-    test_inputs = [np.reshape(x, (784, 1)) for x in X_test]
-    test_data = zip(test_inputs, y_test)
-
-    # training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
-    # training_data = list(training_data)
-
-    net = Network([784, 30, 10])
-    net.SGD(training_data, 30, 20, 5.0, test_data=test_data)
-
-
-
-if __name__ == '__main__':
-    main()
+        return accuracy, loss
