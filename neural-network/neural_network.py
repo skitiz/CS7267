@@ -185,7 +185,7 @@ class Network():
             activations = self.feedforward(x)
 
             last_layer = self.layers[-1]
-            if self.loss_function.__class__.__name__ == 'CrossEntropy':
+            if self.loss_function.__class__.__name__ == 'MeanSquaredError':
                 last_layer.error = last_layer.activation - y[i]
             else:
                 nabla = self.loss_function.nabla(last_layer.activation, y[i])
