@@ -33,3 +33,11 @@ We use MNIST dataset and do 10-Fold Cross Validation to get training and test da
 * To run the code :* `python logistic-regression.py`
 
 Modify the value for `learning_rate`, `gradient_steps` and `splits` to tinker with it.
+
+## Homework 4
+# Neural Network
+We used MNIST dataset to predict the hand written digit. The neural network has one hidden `Softmax` layer, the activation function of input layer is `Sigmoid()` and the the loss function is `Mean Squared Error`.
+
+* To run the code :* `python main.py`
+
+Modify the value for `learning_rate`, `epochs`, `batch_size` and `gradient_steps` to tinker with it.
